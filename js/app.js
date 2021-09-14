@@ -9,19 +9,27 @@ const loadProducts = () => {
 const showProducts = (products) => {
   const allProducts = products.map((pd) => pd);
   for (const product of allProducts) {
-    const image = product.images;
+    const image = product.image;
     const div = document.createElement("div");
     div.classList.add("product");
-    div.innerHTML = `<div class="single-product">
+    div.innerHTML = `
+    <div class="single-product single-item">
       <div>
-    <img class="product-image" src=${image}></img>
+        <img class="product-image rounded mx-auto d-block" src=${image}></img>
       </div>
-      <h3>${product.title}</h3>
-      <p>Category: ${product.category}</p>
-      <h2>Price: $ ${product.price}</h2>
-      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
-      <button id="details-btn" class="btn btn-danger">Details</button></div>
-      `;
+      <div class="py-4">
+        <h1 class="fs-5">${product.title}</h1>
+        <div class="small-text lh-1 my-3">
+        <p>Category: ${product.category}</p>
+        <p>Avg. Rating: ${Object.values(product.rating)[0]}</p>
+        <p>Total Ratings: ${Object.values(product.rating)[1]}</p>
+        <h2 class="fs-4">Price: $ ${product.price}</h2>
+        </div>
+        <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-primary">add to cart</button>
+        <button id="details-btn" class="btn ">Details</button>
+      </div>
+    </div>
+    `;
     document.getElementById("all-products").appendChild(div);
   }
 };
@@ -32,11 +40,12 @@ const addToCart = (id, price) => {
 
   updateTaxAndCharge();
   document.getElementById("total-Products").innerText = count;
+  updateTotal();
 };
 
 const getInputValue = (id) => {
   const element = document.getElementById(id).innerText;
-  const converted = parseInt(element);
+  const converted = parseFloat(element);
   return converted;
 };
 
@@ -45,12 +54,13 @@ const updatePrice = (id, value) => {
   const convertedOldPrice = getInputValue(id);
   const convertPrice = parseFloat(value);
   const total = convertedOldPrice + convertPrice;
-  document.getElementById(id).innerText = Math.round(total);
+  document.getElementById(id).innerText = parseFloat(total).toFixed(2);
+  // document.getElementById(id).innerText = Math.round(total);
 };
 
 // set innerText function
 const setInnerText = (id, value) => {
-  document.getElementById(id).innerText = Math.round(value);
+  document.getElementById(id).innerText = parseFloat(value).toFixed(2);
 };
 
 // update delivery charge and total Tax
@@ -71,10 +81,21 @@ const updateTaxAndCharge = () => {
 };
 
 //grandTotal update function
-const updateTotal = () => {
+const updateTotal = id => {
   const grandTotal =
     getInputValue("price") + getInputValue("delivery-charge") +
     getInputValue("total-tax");
-  document.getElementById("total").innerText = grandTotal;
+  document.getElementById("total").innerText = parseFloat(grandTotal).toFixed(2);
 };
+// confirm Payment function
+const confirmPayment = () => {
+  // const totalPrice = document.getElementById("total").innerText;
+  if (confirm("Please confirm your order!")) {
+    alert("Thanks. Your order is Confirmed!");
+  }
+  else{
+    alert("Order Cancled!");   
+  }
+
+}
 loadProducts();

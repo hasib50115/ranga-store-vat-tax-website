@@ -2,55 +2,78 @@ body {
   overflow-x: hidden;
   font-family: "Montserrat", sans-serif;
 }
-.search-field {
-  border: none;
-  border-radius: 50px;
-  padding: 5px;
-  outline: none;
-}
-.search-field:hover {
-  outline: none;
-  border: none;
-}
-.search-box {
-  border: 1px solid rgb(3, 118, 211);
-  width: 281px;
-  border-radius: 5px;
-  margin: auto;
+/* navbar / search-box styles start  */
+#navbar{
   margin-top: 50px;
-  border-right: none;
 }
-.search-button {
-  padding: 10px 50px;
-  border-radius: 25px;
-  margin-left: 20px;
+#search-box{
+  width: 100%;
 }
+#search-area{
+  margin: auto;
+}
+#search-input{
+  border: 1px solid #6366F1;
+  padding-left: 8px;
+  width: 300px;
+  border-radius: 5px;
+}
+#search-input:focus{
+  outline: none;
+}
+#search-btn{
+  border: 0px;
+  outline: none;
+  background-color: #6366F1;
+  color: white;
+}
+
+/* All products styles start  */
 #all-products {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* border: 1px solid black; */
-  text-align: center;
-  width: 100%;
+  text-align: left;
+  width: 85%;
   margin: auto;
   align-items: center;
   justify-content: center;
 }
+/* Single-product/card styles start  */
 .single-product {
   padding: 10px;
   transition: 0.6s;
+  width: 320px;
+  box-shadow: 10px 15px 45px #88888893;
+  margin: 32px;
+}
+.single-item{
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px;
+  background-color: #eff6ffb0;
 }
 .single-product:hover {
-  box-shadow: 4px 4px 7px gray;
   border-radius: 10px;
-  border: 1px solid cyan;
+  border: 1px solid lightblue;
 }
 .product-image {
   width: 150px;
   height: 150px;
 }
+/* card button styles start  */
+#addToCart-btn{
+  background-color: #6366F1;
+  border: 0;
+}
+#details-btn{
+  background-color: lightskyblue;
+  color: white;
+}
+/* Cart styles start  */
 .cart {
   width: 350px;
-  /* border: 1px solid green; */
   padding: 10px;
   box-shadow: 10px 10px 20px gray;
   border-radius: 5px;
@@ -60,6 +83,13 @@ body {
 .cart-main {
   padding-right: 30px;
 }
+#my-cart{
+  background-color: #eff6ffcb;
+}
+#buy-now{
+  background-color: #6366F1;
+  color: white;
+}
 @media only screen and (max-width: 768px) {
   #all-products {
     display: grid;
@@ -67,7 +97,6 @@ body {
   }
   .cart {
     width: 300px;
-    /* border: 1px solid green; */
     padding: 10px;
     box-shadow: 10px 10px 20px gray;
     border-radius: 5px;
